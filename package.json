@@ -2,7 +2,7 @@
   "name": "weatherapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server-build/index.js",
   "scripts": {
     "dev:build-frontend": "webpack --config webpack.frontend.js --mode=development -w",
     "dev:build-server": "webpack --config webpack.server.js --mode=development -w",
