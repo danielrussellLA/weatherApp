@@ -39,7 +39,7 @@ function App({ weatherData }) {
                     padding: 1rem 0;
                     text-align: center;
                 `}>
-                    <h2>Weather for {name}</h2>
+                    <h2>{name}</h2>
                     <div css={css`
                         display: flex;
                         align-items: center;
