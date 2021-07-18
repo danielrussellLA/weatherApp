@@ -1,10 +1,19 @@
 import { css, Global } from '@emotion/react'
 
-function App({ weatherData }) {
+function App({ weatherData = {} }) {
     const {
         name,
-        main,
-        weather,
+        main = {
+            feels_like: 0,
+            humidity: 0,
+            pressure: 0,
+            temp: 0,
+            temp_max: 0,
+            temp_min: 0,
+        },
+        weather = [{}],
+        wind = {},
+        sys = {}
     } = weatherData
     const {
         feels_like,
@@ -14,11 +23,14 @@ function App({ weatherData }) {
         temp_max,
         temp_min,
     } = main
+
+    const [weatherMetaData] = weather
+
     return (
         <div className="App" css={css`
             font-family: Inter, sans-serif;
-            background: #577da3;
             color: #fff;
+            background: #242323;
         `}>
             <Global styles={css`
                 html, body {
@@ -28,37 +40,74 @@ function App({ weatherData }) {
             `} />
             <div className="main" css={css`
                 height: 100vh;
-                max-width: 900px;
-                margin: auto;
                 padding: 1rem;
-                h2 {
-                    margin: 0;
-                }
             `}>
-                <section className="hero" css={css`
-                    padding: 1rem 0;
-                    text-align: center;
+                <div className="inner" css={css`
+                    background: #577da3;
+                    max-width: 900px;
+                    margin: auto;
+                    padding: 1rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-radius: 4px;
+                    border: 1px solid #fff;
+                    @media (max-width: 650px) {
+                        flex-direction: column;
+                    }
                 `}>
-                    <h2>{name}</h2>
-                    <div css={css`
+                    <section className="hero" css={css`
+                        padding: 1rem 0;
+                        h2 {
+                            margin: 0;
+                        }
+                        flex: 1;
+                        border-right: 1px solid #fff;
+                        margin-right: 2rem;
                         display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
                         align-items: center;
-                        justify-content: center;
-                        img {
-                            height: 100px;
-                            width: 100px;
+                        @media (max-width: 650px) {
+                            border-right: none;
+                            border-bottom: 1px solid #fff;
+                            margin-right: 0;
+                            margin-bottom: 2rem;
+                            width: 100%;
                         }
                     `}>
-                        <img src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`} />
-                        <h1>{Math.ceil(temp)} F</h1>
-                    </div>
-                    <p>{Math.ceil(temp_max)} H {Math.ceil(temp_min)} L</p>
-                </section>
-                <section className="body">
-                    <p>conditions: {weather[0].main}</p>
-                    <p>feels like: {Math.ceil(feels_like)} F</p>
-                    <p>humidity: {humidity}%</p>
-                </section>
+                        <h2>{name}</h2>
+                        <div css={css`
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            img {
+                                height: 100px;
+                                width: 100px;
+                            }
+                        `}>
+                            <img src={`http://openweathermap.org/img/wn/${weatherMetaData.icon}@2x.png`} />
+                            <h1>{Math.ceil(temp)} F</h1>
+                        </div>
+                        <p>{Math.ceil(temp_max)} H {Math.ceil(temp_min)} L</p>
+                    </section>
+                    <section className="body" css={css`
+                        flex: 1;
+                    `}>
+                        <p>conditions: {weatherMetaData.main} - {weatherMetaData.description}</p>
+                        <p>feels like: {Math.ceil(feels_like)} F</p>
+                        <p>humidity: {humidity}%</p>
+                        <p>pressure: {pressure} hPa</p>
+                        <div>
+                            <p>wind:</p>
+                            <ul>
+                                <li>deg: {wind.deg}</li>
+                                <li>gust: {wind.gust} mph</li>
+                                <li>speed: {wind.speed} mph</li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
     )
