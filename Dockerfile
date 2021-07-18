@@ -22,7 +22,5 @@ WORKDIR /weatherApp
 RUN mkdir -p /var/log/nodejs
 
 COPY . .
-RUN npm install -g npm@7.20.0
-RUN npm i
 
 CMD ["/bin/bash", "run.sh"]

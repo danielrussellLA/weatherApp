@@ -5,7 +5,7 @@ RUN_ENV ?= dev
 
 .PHONY: build run stop rm clean
 
-build:
+build: node_modules
 	DOCKER_BUILDKIT=1 docker build -t ${DOCKER_CONTAINER_NAME}:${DOCKER_TAG} .
 
 run:
