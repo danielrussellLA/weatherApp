@@ -5,11 +5,10 @@ RUN_ENV ?= dev
 
 .PHONY: build run stop rm clean
 
-build: node_modules
-	npm run build
+build:
 	docker build -t ${DOCKER_CONTAINER_NAME}:${DOCKER_TAG} .
 
-run: node_modules
+run:
 	docker run --name ${DOCKER_CONTAINER_NAME} -d -p 3000:3000 -e RUN_ENV=${RUN_ENV} ${DOCKER_CONTAINER_NAME}:${DOCKER_TAG}
 
 stop:
