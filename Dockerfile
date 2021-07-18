@@ -2,7 +2,6 @@ FROM node:16.5
 
 EXPOSE 3000
 
-
 # Otherwise some installs will ask for input
 ENV DEBIAN_FRONTEND="noninteractive"
 
@@ -23,7 +22,7 @@ WORKDIR /weatherApp
 RUN mkdir -p /var/log/nodejs
 
 COPY . .
-
-RUN npm install
+RUN npm install -g npm@7.20.0
+RUN npm i
 
 CMD ["/bin/bash", "run.sh"]
