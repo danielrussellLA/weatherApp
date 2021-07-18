@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 const gitRevisionPlugin = new GitRevisionPlugin()
 
-const PUBLIC_PATH = process.env.PUBLIC_PATH || 'http://localhost:3006'
+const PUBLIC_PATH = process.env.PUBLIC_PATH || 'http://localhost:3000'
 const LATEST_GIT_COMMIT_HASH = gitRevisionPlugin.commithash()
 const SHORT_GIT_HASH = LATEST_GIT_COMMIT_HASH.substr(0, 7)
 
