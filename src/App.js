@@ -13,7 +13,8 @@ function App({ weatherData = {} }) {
         },
         weather = [{}],
         wind = {},
-        sys = {}
+        sys = {},
+        rain = {}
     } = weatherData
     const {
         feels_like,
@@ -25,6 +26,19 @@ function App({ weatherData = {} }) {
     } = main
 
     const [weatherMetaData] = weather
+
+    const getRain = () => {
+        let keys = Object.keys(rain)
+        if (keys.length) {
+            return keys.map(key => {
+                console.log('KEY', key, rain[key])
+                return (
+                    <li>{key}: {rain[key]}in</li>
+                )
+            })
+        }
+        return []
+    }
 
     return (
         <div className="App" css={css`
@@ -95,6 +109,13 @@ function App({ weatherData = {} }) {
                         flex: 1;
                     `}>
                         <p>conditions: {weatherMetaData.main} - {weatherMetaData.description}</p>
+                        {
+                            rain &&
+                            <div>
+                                <p>rain:</p>
+                                <ul>{getRain()}</ul>
+                            </div>
+                        }
                         <p>feels like: {Math.ceil(feels_like)} F</p>
                         <p>humidity: {humidity}%</p>
                         <p>pressure: {pressure} hPa</p>

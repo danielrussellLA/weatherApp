@@ -46,8 +46,6 @@ app.get('/', (req, res) => {
         return res.send(result)
     })
 
-
-    // res.send(weatherData)
 })
 
 // https://expressjs.com/en/starter/static-files.html
