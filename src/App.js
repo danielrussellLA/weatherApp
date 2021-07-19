@@ -14,7 +14,7 @@ function App({ weatherData = {} }) {
         weather = [{}],
         wind = {},
         sys = {},
-        rain = {}
+        rain = null
     } = weatherData
     const {
         feels_like,
@@ -31,7 +31,6 @@ function App({ weatherData = {} }) {
         let keys = Object.keys(rain)
         if (keys.length) {
             return keys.map(key => {
-                console.log('KEY', key, rain[key])
                 return (
                     <li>{key}: {rain[key]}in</li>
                 )
